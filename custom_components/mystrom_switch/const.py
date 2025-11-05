@@ -3,10 +3,11 @@
 DOMAIN = "mystrom_switch"
 
 # Default values
-DEFAULT_SCAN_INTERVAL = 30
+DEFAULT_SCAN_INTERVAL = 10
 
 # Configuration
 CONF_MAC = "mac"
+CONF_SCAN_INTERVAL = "scan_interval"
 
 # Attributes
 ATTR_POWER = "power"

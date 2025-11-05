@@ -5,7 +5,11 @@
         "title": "Mit mySTrom Switch verbinden",
         "description": "Geben Sie die IP-Adresse Ihrer mySTrom WiFi-Schaltsteckdose ein",
         "data": {
-          "host": "IP-Adresse"
+          "host": "IP-Adresse",
+          "scan_interval": "Aktualisierungsintervall (Sekunden)"
+        },
+        "data_description": {
+          "scan_interval": "Wie oft die Daten vom Gerät abgerufen werden sollen (5-300 Sekunden, Standard: 10)"
         }
       },
       "discovery_confirm": {

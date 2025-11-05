@@ -5,7 +5,11 @@
         "title": "Connect to mySTrom Switch",
         "description": "Enter the IP address of your mySTrom WiFi Switch",
         "data": {
-          "host": "IP Address"
+          "host": "IP Address",
+          "scan_interval": "Update interval (seconds)"
+        },
+        "data_description": {
+          "scan_interval": "How often to poll the device for updates (5-300 seconds, default: 10)"
         }
       },
       "discovery_confirm": {
