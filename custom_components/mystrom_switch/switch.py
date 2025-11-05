@@ -43,9 +43,10 @@ class MyStromSwitch(CoordinatorEntity, SwitchEntity):
         self._attr_unique_id = f"{entry.entry_id}_switch"
         self._attr_device_info = {
             "identifiers": {(DOMAIN, entry.entry_id)},
-            "name": f"mySTrom Switch {entry.data[CONF_HOST]}",
+            "name": "mySTrom Switch",
             "manufacturer": "mySTrom",
             "model": "WiFi Switch",
+            "configuration_url": f"http://{entry.data[CONF_HOST]}",
         }
 
     @property
