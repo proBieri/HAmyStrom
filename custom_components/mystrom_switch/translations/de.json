@@ -1,0 +1,24 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Mit mySTrom Switch verbinden",
+        "description": "Geben Sie die IP-Adresse Ihrer mySTrom WiFi-Schaltsteckdose ein",
+        "data": {
+          "host": "IP-Adresse"
+        }
+      },
+      "discovery_confirm": {
+        "title": "mySTrom Switch bestätigen",
+        "description": "Ein mySTrom Switch wurde unter {host} gefunden. Möchten Sie ihn zu Home Assistant hinzufügen?"
+      }
+    },
+    "error": {
+      "cannot_connect": "Verbindung zum Gerät fehlgeschlagen. Bitte überprüfen Sie die IP-Adresse und stellen Sie sicher, dass das Gerät eingeschaltet und mit dem Netzwerk verbunden ist.",
+      "unknown": "Unerwarteter Fehler aufgetreten"
+    },
+    "abort": {
+      "already_configured": "Gerät ist bereits konfiguriert"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "domain": "mystrom_switch",
+  "name": "mySTrom Switch",
+  "version": "1.0.0",
+  "documentation": "https://github.com/proBieri/HAmyStrom",
+  "issue_tracker": "https://github.com/proBieri/HAmyStrom/issues",
+  "requirements": ["aiohttp>=3.8.0"],
+  "codeowners": ["@proBieri"],
+  "config_flow": true,
+  "iot_class": "local_polling",
+  "integration_type": "device"
+}
