@@ -9,7 +9,7 @@ import voluptuous as vol
 
 from homeassistant import config_entries
 from homeassistant.components import dhcp, zeroconf
-from homeassistant.const import CONF_HOST
+from homeassistant.const import CONF_HOST, CONF_NAME
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
@@ -56,6 +56,11 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     VERSION = 1
 
+    def __init__(self) -> None:
+        """Initialize the config flow."""
+        self._discovered_host: str | None = None
+        self._discovered_mac: str | None = None
+
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
@@ -75,10 +80,40 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 await self.async_set_unique_id(info["mac"])
                 self._abort_if_unique_id_configured()
 
-                return self.async_create_entry(title=info["title"], data=user_input)
+                # Store data for next step
+                self._discovered_host = user_input[CONF_HOST]
+                self._discovered_mac = info["mac"]
+
+                # Store config data for name step
+                self.context["user_input"] = user_input
+
+                return await self.async_step_name()
 
         return self.async_show_form(
             step_id="user", data_schema=STEP_USER_DATA_SCHEMA, errors=errors
+        )
+
+    async def async_step_name(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        """Handle the name step."""
+        if user_input is not None:
+            # Combine data from both steps
+            config_data = self.context["user_input"]
+            config_data[CONF_NAME] = user_input[CONF_NAME]
+
+            title = user_input[CONF_NAME] if user_input[CONF_NAME] else "myStrom Switch"
+
+            return self.async_create_entry(title=title, data=config_data)
+
+        # Default name suggestion
+        suggested_name = f"myStrom Switch"
+
+        return self.async_show_form(
+            step_id="name",
+            data_schema=vol.Schema({
+                vol.Optional(CONF_NAME, default=suggested_name): str,
+            }),
         )
 
     async def async_step_zeroconf(

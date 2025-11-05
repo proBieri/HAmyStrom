@@ -11,6 +11,7 @@ from homeassistant.components.sensor import (
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import (
     CONF_HOST,
+    CONF_NAME,
     UnitOfEnergy,
     UnitOfPower,
     UnitOfTemperature,
@@ -51,9 +52,10 @@ class MyStromSensorBase(CoordinatorEntity, SensorEntity):
         """Initialize the sensor."""
         super().__init__(coordinator)
         self._entry = entry
+        device_name = entry.data.get(CONF_NAME, "myStrom Switch")
         self._attr_device_info = {
             "identifiers": {(DOMAIN, entry.entry_id)},
-            "name": "myStrom Switch",
+            "name": device_name,
             "manufacturer": "myStrom",
             "model": "WiFi Switch",
             "configuration_url": f"http://{entry.data[CONF_HOST]}",

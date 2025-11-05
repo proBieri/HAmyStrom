@@ -6,7 +6,7 @@ from typing import Any
 
 from homeassistant.components.switch import SwitchEntity
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import CONF_HOST
+from homeassistant.const import CONF_HOST, CONF_NAME
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
@@ -41,9 +41,10 @@ class MyStromSwitch(CoordinatorEntity, SwitchEntity):
         self._api = api
         self._entry = entry
         self._attr_unique_id = f"{entry.entry_id}_switch"
+        device_name = entry.data.get(CONF_NAME, "myStrom Switch")
         self._attr_device_info = {
             "identifiers": {(DOMAIN, entry.entry_id)},
-            "name": "myStrom Switch",
+            "name": device_name,
             "manufacturer": "myStrom",
             "model": "WiFi Switch",
             "configuration_url": f"http://{entry.data[CONF_HOST]}",

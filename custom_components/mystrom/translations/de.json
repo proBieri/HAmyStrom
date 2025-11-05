@@ -12,6 +12,16 @@
           "scan_interval": "Wie oft die Daten vom Gerät abgerufen werden sollen (5-300 Sekunden, Standard: 10)"
         }
       },
+      "name": {
+        "title": "Gerät benennen",
+        "description": "Geben Sie einen Namen für Ihr myStrom-Gerät ein",
+        "data": {
+          "name": "Name"
+        },
+        "data_description": {
+          "name": "Ein eindeutiger Name für dieses Gerät (z.B. 'Kaffeemaschine', 'Heizung Wohnzimmer')"
+        }
+      },
       "discovery_confirm": {
         "title": "myStrom Switch bestätigen",
         "description": "Ein myStrom Switch wurde unter {host} gefunden. Möchten Sie ihn zu Home Assistant hinzufügen?"

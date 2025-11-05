@@ -12,6 +12,16 @@
           "scan_interval": "How often to poll the device for updates (5-300 seconds, default: 10)"
         }
       },
+      "name": {
+        "title": "Name Device",
+        "description": "Enter a name for your myStrom device",
+        "data": {
+          "name": "Name"
+        },
+        "data_description": {
+          "name": "A unique name for this device (e.g., 'Coffee Machine', 'Living Room Heater')"
+        }
+      },
       "discovery_confirm": {
         "title": "Confirm myStrom Switch",
         "description": "A myStrom Switch was discovered at {host}. Do you want to add it to Home Assistant?"
