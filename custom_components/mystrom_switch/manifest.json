@@ -8,5 +8,17 @@
   "codeowners": ["@proBieri"],
   "config_flow": true,
   "iot_class": "local_polling",
-  "integration_type": "device"
+  "integration_type": "device",
+  "zeroconf": [
+    {
+      "type": "_hap._tcp.local.",
+      "name": "mystrom-switch*"
+    }
+  ],
+  "dhcp": [
+    {
+      "hostname": "mystrom-switch*",
+      "macaddress": "64B473*"
+    }
+  ]
 }

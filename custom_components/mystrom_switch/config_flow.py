@@ -8,6 +8,7 @@ import aiohttp
 import voluptuous as vol
 
 from homeassistant import config_entries
+from homeassistant.components import dhcp, zeroconf
 from homeassistant.const import CONF_HOST
 from homeassistant.core import HomeAssistant
 from homeassistant.data_entry_flow import FlowResult
@@ -80,16 +81,48 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             step_id="user", data_schema=STEP_USER_DATA_SCHEMA, errors=errors
         )
 
-    async def async_step_discovery(
-        self, discovery_info: dict[str, Any]
+    async def async_step_zeroconf(
+        self, discovery_info: zeroconf.ZeroconfServiceInfo
     ) -> FlowResult:
-        """Handle discovery of a myStrom device."""
-        host = discovery_info[CONF_HOST]
-        mac = discovery_info.get("mac", host.replace(".", "_"))
+        """Handle zeroconf discovery."""
+        host = discovery_info.host
+
+        # Try to get MAC address from device info
+        session = async_get_clientsession(self.hass)
+        api = MyStromAPI(host, session)
+
+        try:
+            info = await api.get_info()
+            mac = info.get("mac", host.replace(".", "_"))
+        except Exception:
+            mac = host.replace(".", "_")
 
         # Set unique ID to prevent duplicate entries
         await self.async_set_unique_id(mac)
         self._abort_if_unique_id_configured()
+
+        # Store the discovered host for confirmation step
+        self.context["title_placeholders"] = {"host": host}
+
+        return await self.async_step_discovery_confirm()
+
+    async def async_step_dhcp(
+        self, discovery_info: dhcp.DhcpServiceInfo
+    ) -> FlowResult:
+        """Handle dhcp discovery."""
+        host = discovery_info.ip
+        mac = discovery_info.macaddress.replace(":", "").upper()
+
+        # Set unique ID to prevent duplicate entries
+        await self.async_set_unique_id(mac)
+        self._abort_if_unique_id_configured()
+
+        # Verify it's a myStrom device by testing connection
+        session = async_get_clientsession(self.hass)
+        api = MyStromAPI(host, session)
+
+        if not await api.test_connection():
+            return self.async_abort(reason="cannot_connect")
 
         # Store the discovered host for confirmation step
         self.context["title_placeholders"] = {"host": host}
