@@ -1,4 +1,4 @@
-"""Platform for mySTrom switch integration."""
+"""Platform for myStrom switch integration."""
 from __future__ import annotations
 
 import logging
@@ -21,7 +21,7 @@ async def async_setup_entry(
     entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    """Set up mySTrom switch based on a config entry."""
+    """Set up myStrom switch based on a config entry."""
     data = hass.data[DOMAIN][entry.entry_id]
     coordinator = data["coordinator"]
     api = data["api"]
@@ -30,7 +30,7 @@ async def async_setup_entry(
 
 
 class MyStromSwitch(CoordinatorEntity, SwitchEntity):
-    """Representation of a mySTrom WiFi Switch."""
+    """Representation of a myStrom WiFi Switch."""
 
     _attr_has_entity_name = True
     _attr_name = None
@@ -43,8 +43,8 @@ class MyStromSwitch(CoordinatorEntity, SwitchEntity):
         self._attr_unique_id = f"{entry.entry_id}_switch"
         self._attr_device_info = {
             "identifiers": {(DOMAIN, entry.entry_id)},
-            "name": "mySTrom Switch",
-            "manufacturer": "mySTrom",
+            "name": "myStrom Switch",
+            "manufacturer": "myStrom",
             "model": "WiFi Switch",
             "configuration_url": f"http://{entry.data[CONF_HOST]}",
         }

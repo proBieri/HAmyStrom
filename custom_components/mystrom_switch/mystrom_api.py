@@ -1,4 +1,4 @@
-"""API client for mySTrom devices."""
+"""API client for myStrom devices."""
 from __future__ import annotations
 
 import asyncio
@@ -11,7 +11,7 @@ _LOGGER = logging.getLogger(__name__)
 
 
 class MyStromAPI:
-    """Class to communicate with mySTrom WiFi Switch via REST API."""
+    """Class to communicate with myStrom WiFi Switch via REST API."""
 
     def __init__(self, host: str, session: aiohttp.ClientSession) -> None:
         """Initialize the API client."""
@@ -42,10 +42,10 @@ class MyStromAPI:
                     "temperature": data.get("temperature", 0.0),
                 }
         except aiohttp.ClientError as err:
-            _LOGGER.error("Error fetching mySTrom state: %s", err)
+            _LOGGER.error("Error fetching myStrom state: %s", err)
             raise
         except asyncio.TimeoutError as err:
-            _LOGGER.error("Timeout fetching mySTrom state")
+            _LOGGER.error("Timeout fetching myStrom state")
             raise
 
     async def turn_on(self) -> bool:
@@ -59,7 +59,7 @@ class MyStromAPI:
                 response.raise_for_status()
                 return True
         except aiohttp.ClientError as err:
-            _LOGGER.error("Error turning on mySTrom switch: %s", err)
+            _LOGGER.error("Error turning on myStrom switch: %s", err)
             return False
 
     async def turn_off(self) -> bool:
@@ -73,7 +73,7 @@ class MyStromAPI:
                 response.raise_for_status()
                 return True
         except aiohttp.ClientError as err:
-            _LOGGER.error("Error turning off mySTrom switch: %s", err)
+            _LOGGER.error("Error turning off myStrom switch: %s", err)
             return False
 
     async def toggle(self) -> bool:
@@ -86,7 +86,7 @@ class MyStromAPI:
                 response.raise_for_status()
                 return True
         except aiohttp.ClientError as err:
-            _LOGGER.error("Error toggling mySTrom switch: %s", err)
+            _LOGGER.error("Error toggling myStrom switch: %s", err)
             return False
 
     async def get_info(self) -> dict[str, Any]:
@@ -103,7 +103,7 @@ class MyStromAPI:
                 response.raise_for_status()
                 return await response.json()
         except aiohttp.ClientError as err:
-            _LOGGER.error("Error fetching mySTrom info: %s", err)
+            _LOGGER.error("Error fetching myStrom info: %s", err)
             raise
 
     async def test_connection(self) -> bool:

@@ -1,4 +1,4 @@
-"""Config flow for mySTrom Switch integration."""
+"""Config flow for myStrom Switch integration."""
 from __future__ import annotations
 
 import logging
@@ -47,11 +47,11 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
         # Fallback if info endpoint doesn't work
         mac = data[CONF_HOST].replace(".", "_")
 
-    return {"title": f"mySTrom Switch ({data[CONF_HOST]})", "mac": mac}
+    return {"title": f"myStrom Switch ({data[CONF_HOST]})", "mac": mac}
 
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for mySTrom Switch."""
+    """Handle a config flow for myStrom Switch."""
 
     VERSION = 1
 
@@ -83,7 +83,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_discovery(
         self, discovery_info: dict[str, Any]
     ) -> FlowResult:
-        """Handle discovery of a mySTrom device."""
+        """Handle discovery of a myStrom device."""
         host = discovery_info[CONF_HOST]
         mac = discovery_info.get("mac", host.replace(".", "_"))
 
@@ -103,7 +103,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input is not None:
             host = self.context["title_placeholders"]["host"]
             return self.async_create_entry(
-                title=f"mySTrom Switch ({host})",
+                title=f"myStrom Switch ({host})",
                 data={CONF_HOST: host, CONF_SCAN_INTERVAL: DEFAULT_SCAN_INTERVAL},
             )
 

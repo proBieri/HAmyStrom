@@ -1,4 +1,4 @@
-"""Platform for mySTrom sensor integration."""
+"""Platform for myStrom sensor integration."""
 from __future__ import annotations
 
 import logging
@@ -29,7 +29,7 @@ async def async_setup_entry(
     entry: ConfigEntry,
     async_add_entities: AddEntitiesCallback,
 ) -> None:
-    """Set up mySTrom sensors based on a config entry."""
+    """Set up myStrom sensors based on a config entry."""
     data = hass.data[DOMAIN][entry.entry_id]
     coordinator = data["coordinator"]
 
@@ -43,7 +43,7 @@ async def async_setup_entry(
 
 
 class MyStromSensorBase(CoordinatorEntity, SensorEntity):
-    """Base class for mySTrom sensors."""
+    """Base class for myStrom sensors."""
 
     _attr_has_entity_name = True
 
@@ -53,8 +53,8 @@ class MyStromSensorBase(CoordinatorEntity, SensorEntity):
         self._entry = entry
         self._attr_device_info = {
             "identifiers": {(DOMAIN, entry.entry_id)},
-            "name": "mySTrom Switch",
-            "manufacturer": "mySTrom",
+            "name": "myStrom Switch",
+            "manufacturer": "myStrom",
             "model": "WiFi Switch",
             "configuration_url": f"http://{entry.data[CONF_HOST]}",
         }
@@ -66,7 +66,7 @@ class MyStromSensorBase(CoordinatorEntity, SensorEntity):
 
 
 class MyStromPowerSensor(MyStromSensorBase):
-    """Representation of mySTrom power consumption sensor."""
+    """Representation of myStrom power consumption sensor."""
 
     _attr_device_class = SensorDeviceClass.POWER
     _attr_native_unit_of_measurement = UnitOfPower.WATT
@@ -88,7 +88,7 @@ class MyStromPowerSensor(MyStromSensorBase):
 
 
 class MyStromEnergySensor(MyStromSensorBase):
-    """Representation of mySTrom energy consumption sensor."""
+    """Representation of myStrom energy consumption sensor."""
 
     _attr_device_class = SensorDeviceClass.ENERGY
     _attr_native_unit_of_measurement = UnitOfEnergy.KILO_WATT_HOUR
@@ -108,7 +108,7 @@ class MyStromEnergySensor(MyStromSensorBase):
         """Return the total energy consumption in kWh.
 
         This calculates cumulative energy based on power readings.
-        For more accurate energy tracking, the mySTrom API would need
+        For more accurate energy tracking, the myStrom API would need
         to provide direct energy readings.
         """
         if self.coordinator.data:
@@ -129,7 +129,7 @@ class MyStromEnergySensor(MyStromSensorBase):
 
 
 class MyStromTemperatureSensor(MyStromSensorBase):
-    """Representation of mySTrom temperature sensor."""
+    """Representation of myStrom temperature sensor."""
 
     _attr_device_class = SensorDeviceClass.TEMPERATURE
     _attr_native_unit_of_measurement = UnitOfTemperature.CELSIUS

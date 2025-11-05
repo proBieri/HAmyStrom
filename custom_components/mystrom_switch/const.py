@@ -1,4 +1,4 @@
-"""Constants for the mySTrom Switch integration."""
+"""Constants for the myStrom Switch integration."""
 
 DOMAIN = "mystrom_switch"
 

@@ -1,4 +1,4 @@
-"""The mySTrom Switch integration."""
+"""The myStrom Switch integration."""
 from __future__ import annotations
 
 import logging
@@ -19,7 +19,7 @@ PLATFORMS: list[Platform] = [Platform.SWITCH, Platform.SENSOR]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up mySTrom Switch from a config entry."""
+    """Set up myStrom Switch from a config entry."""
     host = entry.data[CONF_HOST]
     scan_interval = entry.data.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)
 
@@ -36,7 +36,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     coordinator = DataUpdateCoordinator(
         hass,
         _LOGGER,
-        name=f"mySTrom Switch {host}",
+        name=f"myStrom Switch {host}",
         update_method=async_update_data,
         update_interval=timedelta(seconds=scan_interval),
     )

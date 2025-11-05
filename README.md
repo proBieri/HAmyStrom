@@ -1,10 +1,10 @@
-# mySTrom Switch Integration for Home Assistant
+# myStrom Switch Integration for Home Assistant
 
-Eine HACS Integration für mySTrom WiFi-Schaltsteckdosen mit voller Unterstützung für das Home Assistant Energy Monitoring.
+Eine HACS Integration für myStrom WiFi-Schaltsteckdosen mit voller Unterstützung für das Home Assistant Energy Monitoring.
 
 ## Features
 
-- ✅ Schalten der mySTrom WiFi-Steckdosen
+- ✅ Schalten der myStrom WiFi-Steckdosen
 - ✅ Echtzeit-Leistungsmessung (Watt)
 - ✅ Energieverbrauch-Tracking (kWh)
 - ✅ Temperaturüberwachung
@@ -15,8 +15,8 @@ Eine HACS Integration für mySTrom WiFi-Schaltsteckdosen mit voller Unterstützu
 
 ## Unterstützte Geräte
 
-- mySTrom WiFi Switch (CH)
-- mySTrom WiFi Switch EU
+- myStrom WiFi Switch (CH)
+- myStrom WiFi Switch EU
 
 ## Installation
 
@@ -28,7 +28,7 @@ Eine HACS Integration für mySTrom WiFi-Schaltsteckdosen mit voller Unterstützu
 4. Fügen Sie die Repository-URL hinzu: `https://github.com/proBieri/HAmyStrom`
 5. Wählen Sie die Kategorie "Integration"
 6. Klicken Sie auf "Hinzufügen"
-7. Suchen Sie nach "mySTrom Switch" und klicken Sie auf "Herunterladen"
+7. Suchen Sie nach "myStrom Switch" und klicken Sie auf "Herunterladen"
 8. Starten Sie Home Assistant neu
 
 ### Manuelle Installation
@@ -43,13 +43,13 @@ Eine HACS Integration für mySTrom WiFi-Schaltsteckdosen mit voller Unterstützu
 
 1. Gehen Sie zu **Einstellungen** → **Geräte & Dienste**
 2. Klicken Sie auf **+ Integration hinzufügen**
-3. Suchen Sie nach **mySTrom Switch**
-4. Geben Sie die IP-Adresse Ihrer mySTrom-Steckdose ein
+3. Suchen Sie nach **myStrom Switch**
+4. Geben Sie die IP-Adresse Ihrer myStrom-Steckdose ein
 5. Fertig!
 
 ### Auto-Discovery
 
-Die Integration unterstützt automatische Erkennung von mySTrom-Geräten im Netzwerk. Neu erkannte Geräte erscheinen automatisch in den Benachrichtigungen.
+Die Integration unterstützt automatische Erkennung von myStrom-Geräten im Netzwerk. Neu erkannte Geräte erscheinen automatisch in den Benachrichtigungen.
 
 ## Verwendung
 
@@ -69,7 +69,7 @@ Nach der Einrichtung werden folgende Entities erstellt:
 
 1. Gehen Sie zu **Einstellungen** → **Dashboards** → **Energie**
 2. Klicken Sie auf **Verbrauch hinzufügen**
-3. Wählen Sie den Energy Sensor Ihrer mySTrom-Steckdose
+3. Wählen Sie den Energy Sensor Ihrer myStrom-Steckdose
 4. Optional: Ordnen Sie das Gerät einem Raum oder Gerät zu
 
 Der Energieverbrauch wird nun automatisch im Energy Dashboard erfasst und visualisiert.
@@ -106,7 +106,7 @@ automation:
 
 ## API Endpunkte
 
-Die Integration nutzt die lokale REST API der mySTrom-Geräte:
+Die Integration nutzt die lokale REST API der myStrom-Geräte:
 
 - `GET /report` - Status und Messwerte abrufen
 - `GET /relay?state=1` - Einschalten
@@ -118,7 +118,7 @@ Die Integration nutzt die lokale REST API der mySTrom-Geräte:
 
 ### Gerät wird nicht gefunden
 - Stellen Sie sicher, dass das Gerät mit dem gleichen Netzwerk verbunden ist
-- Überprüfen Sie die IP-Adresse des Geräts (z.B. in der mySTrom App oder im Router)
+- Überprüfen Sie die IP-Adresse des Geräts (z.B. in der myStrom App oder im Router)
 - Stellen Sie sicher, dass keine Firewall die Kommunikation blockiert
 
 ### Sensoren zeigen keine Werte
