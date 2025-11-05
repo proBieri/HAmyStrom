@@ -159,13 +159,3 @@ Entwickelt für die Home Assistant Community
 ## Support
 
 Bei Problemen oder Fragen erstellen Sie bitte ein [Issue auf GitHub](https://github.com/proBieri/HAmyStrom/issues).
-
-## Changelog
-
-### Version 1.0.0
-- Initiales Release
-- Switch Unterstützung
-- Leistungs-, Energie- und Temperatursensoren
-- Energy Dashboard Integration
-- Auto-Discovery
-- Deutsche und englische Übersetzungen
