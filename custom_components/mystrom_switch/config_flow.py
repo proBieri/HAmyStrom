@@ -47,7 +47,7 @@ async def validate_input(hass: HomeAssistant, data: dict[str, Any]) -> dict[str,
         # Fallback if info endpoint doesn't work
         mac = data[CONF_HOST].replace(".", "_")
 
-    return {"title": f"myStrom Switch ({data[CONF_HOST]})", "mac": mac}
+    return {"title": "myStrom Switch", "mac": mac}
 
 
 class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
@@ -103,7 +103,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if user_input is not None:
             host = self.context["title_placeholders"]["host"]
             return self.async_create_entry(
-                title=f"myStrom Switch ({host})",
+                title="myStrom Switch",
                 data={CONF_HOST: host, CONF_SCAN_INTERVAL: DEFAULT_SCAN_INTERVAL},
             )
 
