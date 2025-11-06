@@ -31,12 +31,15 @@ async def async_setup_entry(
     async_add_entities: AddEntitiesCallback,
 ) -> None:
     """Set up myStrom sensors based on a config entry."""
+    from .const import CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL
+
     data = hass.data[DOMAIN][entry.entry_id]
     coordinator = data["coordinator"]
+    scan_interval = entry.data.get(CONF_SCAN_INTERVAL, DEFAULT_SCAN_INTERVAL)
 
     sensors = [
         MyStromPowerSensor(coordinator, entry),
-        MyStromEnergySensor(coordinator, entry),
+        MyStromEnergySensor(coordinator, entry, scan_interval),
         MyStromTemperatureSensor(coordinator, entry),
     ]
 
@@ -97,32 +100,31 @@ class MyStromEnergySensor(MyStromSensorBase):
     _attr_state_class = SensorStateClass.TOTAL_INCREASING
     _attr_suggested_display_precision = 2
 
-    def __init__(self, coordinator, entry: ConfigEntry) -> None:
+    def __init__(self, coordinator, entry: ConfigEntry, scan_interval: int) -> None:
         """Initialize the energy sensor."""
         super().__init__(coordinator, entry)
         self._attr_unique_id = f"{entry.entry_id}_energy"
         self._attr_name = "Energy"
         self._total_energy = 0.0
         self._last_power = 0.0
+        self._scan_interval = scan_interval
 
     @property
     def native_value(self) -> float | None:
         """Return the total energy consumption in kWh.
 
         This calculates cumulative energy based on power readings.
-        For more accurate energy tracking, the myStrom API would need
-        to provide direct energy readings.
+        Energy (kWh) = Power (W) × Time (h) / 1000
         """
         if self.coordinator.data:
             current_power = self.coordinator.data.get("power", 0.0)
 
             # Simple integration: assume linear power consumption between readings
-            # Update interval is typically 30 seconds
             if self._last_power > 0 or current_power > 0:
                 avg_power = (self._last_power + current_power) / 2
-                # Energy = Power * Time (in hours)
-                # 30 seconds = 30/3600 hours
-                energy_increment = (avg_power * 30) / 3600000  # Convert to kWh
+                # Energy = Power (W) * Time (seconds) / 3600 (to hours) / 1000 (to kWh)
+                time_hours = self._scan_interval / 3600.0
+                energy_increment = (avg_power * time_hours) / 1000.0
                 self._total_energy += energy_increment
 
             self._last_power = current_power
