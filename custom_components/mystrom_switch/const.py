@@ -1,6 +1,6 @@
 """Constants for the myStrom Switch integration."""
 
-DOMAIN = "mystrom"
+DOMAIN = "mystrom_switch"
 
 # Default values
 DEFAULT_SCAN_INTERVAL = 10

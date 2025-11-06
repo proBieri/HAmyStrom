@@ -34,7 +34,7 @@ Eine HACS Integration für myStrom WiFi-Schaltsteckdosen mit voller Unterstützu
 ### Manuelle Installation
 
 1. Laden Sie den neuesten Release herunter
-2. Kopieren Sie den Ordner `custom_components/mystrom` in Ihr Home Assistant `config/custom_components/` Verzeichnis
+2. Kopieren Sie den Ordner `custom_components/mystrom_switch` in Ihr Home Assistant `config/custom_components/` Verzeichnis
 3. Starten Sie Home Assistant neu
 
 ## Konfiguration
@@ -58,12 +58,12 @@ Die Integration unterstützt automatische Erkennung von myStrom-Geräten im Netz
 Nach der Einrichtung werden folgende Entities erstellt:
 
 #### Switch
-- `switch.mystrom_xxx` - Hauptschalter zum Ein-/Ausschalten der Steckdose
+- `switch.mystrom_switch_xxx` - Hauptschalter zum Ein-/Ausschalten der Steckdose
 
 #### Sensoren
-- `sensor.mystrom_xxx_power` - Aktuelle Leistungsaufnahme in Watt
-- `sensor.mystrom_xxx_energy` - Kumulierter Energieverbrauch in kWh
-- `sensor.mystrom_xxx_temperature` - Gerätetemperatur in °C
+- `sensor.mystrom_switch_xxx_power` - Aktuelle Leistungsaufnahme in Watt
+- `sensor.mystrom_switch_xxx_energy` - Kumulierter Energieverbrauch in kWh
+- `sensor.mystrom_switch_xxx_temperature` - Gerätetemperatur in °C
 
 ### Energy Dashboard Integration
 
@@ -81,14 +81,14 @@ automation:
   - alias: "Kaffeemaschine ausschalten nach 2 Stunden"
     trigger:
       - platform: state
-        entity_id: switch.mystrom_kaffeemaschine
+        entity_id: switch.mystrom_switch_kaffeemaschine
         to: "on"
         for:
           hours: 2
     action:
       - service: switch.turn_off
         target:
-          entity_id: switch.mystrom_kaffeemaschine
+          entity_id: switch.mystrom_switch_kaffeemaschine
       - service: notify.mobile_app
         data:
           message: "Kaffeemaschine wurde automatisch ausgeschaltet"
@@ -96,7 +96,7 @@ automation:
   - alias: "Benachrichtigung bei hohem Energieverbrauch"
     trigger:
       - platform: numeric_state
-        entity_id: sensor.mystrom_heizung_power
+        entity_id: sensor.mystrom_switch_heizung_power
         above: 1500
     action:
       - service: notify.mobile_app
@@ -143,7 +143,7 @@ git clone https://github.com/proBieri/HAmyStrom.git
 cd HAmyStrom
 
 # In Home Assistant custom_components Ordner verlinken
-ln -s $(pwd)/custom_components/mystrom /path/to/homeassistant/config/custom_components/
+ln -s $(pwd)/custom_components/mystrom_switch /path/to/homeassistant/config/custom_components/
 
 # Home Assistant neu starten
 ```
